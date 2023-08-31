@@ -44,14 +44,26 @@ public class ATM
         return accounts.get (userId);
     }
 
-    public double depositMoney (String userId, double amount)
+    public double depositMoney (String userId, double amount) throws Exception
     {
-        return -1;
+        if (!accounts.containsKey (userId))
+        {
+            throw new Exception ("youre broke");
+        }
+
+        accounts.put (userId, accounts.get (userId) + amount);
+        return amount; //return double of the deposited amount
     } 
 
-    public double withdrawMoney (String userId, double amount)
+    public double withdrawMoney (String userId, double amount) throws Exception
     {
-        return -1;
+        if (!accounts.containsKey (userId) || accounts.get (userId) > amount)
+        {
+            throw new Exception ("youre broke");
+        }
+
+        accounts.put (userId, accounts.get (userId) - amount);
+        return amount; //return double of the deposited amount
     }
 
     public boolean transferMoney (String fromAccount, String toAccount, double amount)
