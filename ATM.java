@@ -10,9 +10,14 @@ public class ATM
         accounts = new HashMap<String, Double> ();
     }
 
-    public void openAccount (String userId, double amount)
+    public void openAccount (String userId, double amount) throws Exception
     {
-
+        if (accounts.containsKey (userId))
+        {
+            throw new Exception ("Error: account already exists");
+        }
+        
+        accounts.put(userId, amount);
     }
 
     public void closeAccount (String userId)
@@ -42,6 +47,6 @@ public class ATM
 
     public void audit ()
     {
-        
+
     }   
 }
