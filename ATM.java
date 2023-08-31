@@ -66,13 +66,34 @@ public class ATM
         return amount; //return double of the deposited amount
     }
 
-    public boolean transferMoney (String fromAccount, String toAccount, double amount)
+    public boolean transferMoney (String fromAccount, String toAccount, double amount) throws Exception
     {
-        return false; 
+        if (!accounts.containsKey (fromAccount) || !accounts.containsKey (toAccount))
+        {
+            // throw new Exception ("Error: invalid accounts");
+            return false;
+        }
+
+        try {
+            withdrawMoney (fromAccount, amount);
+            depositMoney (toAccount, amount);
+            return true; 
+        }
+        catch (Exception e)
+        {
+            // throw e;
+            return false; 
+        }
     }
 
-    public void audit ()
+    public void audit () throws IOException
     {
+        PrintWriter pw = new PrintWriter(new BufferedWriter (new FileWriter ("AccountAudit.txt")));
 
+        for (Map.Entry<String, Double> element: accounts.entrySet()) {
+            pw.println ("UserID: " + element.getKey () + " Balance: " + element.getValue()); 
+        }
+
+        pw.close(); 
     }   
 }
