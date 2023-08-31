@@ -1,0 +1,2 @@
+UserID: user2@example.com Balance: 550.0
+UserID: user1@example.com Balance: 1050.0

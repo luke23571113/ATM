@@ -57,7 +57,7 @@ public class ATM
 
     public double withdrawMoney (String userId, double amount) throws Exception
     {
-        if (!accounts.containsKey (userId) || accounts.get (userId) > amount)
+        if (!accounts.containsKey (userId) || accounts.get (userId) < amount)
         {
             throw new Exception ("youre broke");
         }
